@@ -1,11 +1,13 @@
 // import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {auth, createUserDocumentFromAuth, signInGooglePopup, signInWithGmailEmailAndPassword} from '../../utils/firebase.utils';
 import FormInput from "../form-input/form-input.component";
 
 import './sign-in-form.styles.scss';
 import Button from "../button/button.component";
 // import { signInWithEmailAndPassword } from "firebase/auth";
+
+// import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields ={
  
@@ -18,6 +20,8 @@ const SignInForm = () => {
 
     const {email,password} = formFields;
 
+    // const {setCurrentUser} = useContext(UserContext);
+
     const resetFormFields= ()=>{
         setFormFields(defaultFormFields);
     };
@@ -28,6 +32,7 @@ const SignInForm = () => {
 
     const signInWithGoogle = async() => {
         const {user} = await signInGooglePopup();
+        
         console.log(user);
         const userDocRef =await createUserDocumentFromAuth(user);
 
@@ -38,8 +43,9 @@ const SignInForm = () => {
     
             //const {email,password} = formFields;
             try {
-              const responsest =  await signInWithGmailEmailAndPassword(email,password);
-              console.log(responsest);
+              const {user} =  await signInWithGmailEmailAndPassword(email,password);
+              console.log(user);
+            //   setCurrentUser(user);
                 resetFormFields();
             } catch (error) {
                 console.error('user creation fialed',error);

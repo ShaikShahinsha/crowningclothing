@@ -4,7 +4,9 @@ import {getAuth,
         signInWithPopup,
         GoogleAuthProvider,
         createUserWithEmailAndPassword,
-        signInWithEmailAndPassword
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged
 } from 'firebase/auth';
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
@@ -78,3 +80,10 @@ export const signInWithGmailEmailAndPassword = async(email,password) =>{
 
     return signInWithEmailAndPassword(auth,email,password);
 }
+
+
+export const SignOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangeLsitener = (callback) => onAuthStateChanged(auth, callback)
+
+   
