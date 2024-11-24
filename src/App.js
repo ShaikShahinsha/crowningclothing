@@ -6,6 +6,7 @@ import {Routes, Route} from 'react-router-dom';
 import Navigation from "./routes/navigation/navigation.component";
 import SignIn from "./routes/signin/signin.component";
 import Shop from "./routes/shop/shop.component";
+import CheckOut from "./routes/checkout/checkout.component";
 // const Shop = () => {
 
 //   return (
@@ -21,6 +22,7 @@ const App = ()=> {
         <Route index element={<Home/>}/>
         <Route path='shop' element={<Shop/>}/>
         <Route path='signin' element={<SignIn/>}/>
+        <Route path='checkout' element={<CheckOut/>}/>
       </Route>
       {/* <Home/> */}
     </Routes>
