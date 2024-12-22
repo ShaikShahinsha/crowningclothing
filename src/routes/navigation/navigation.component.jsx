@@ -1,13 +1,13 @@
 import { Fragment, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo} from "../../assets/crown.svg";
-import './navigation.styles.scss';
+//import './navigation.styles.jsx';
 import { UserContext } from "../../contexts/user.context";
 import { SignOutUser } from "../../utils/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
-
+import { NavigationContainer,NavLinks,NavLink,LogoContainer } from "./navigation.styles";
 const Navigation = () => {
   const {currentUser} = useContext(UserContext);
   const {isCartOpen} = useContext(CartContext);
@@ -17,29 +17,29 @@ const Navigation = () => {
   // }
     return(
       <Fragment>
-        <div className="navigation">
-            <Link className="logo-container" to='/'>
+        <NavigationContainer>
+            <LogoContainer to='/'>
                 <CrwnLogo className="logo" />
-            </Link>
-            <div className="nav-links-container">
-                <Link className="nav-link" to='/shop'>
+            </LogoContainer>
+            <NavLinks>
+                <NavLink to='/shop'>
                     SHOP
-                </Link>
+                </NavLink>
                 {
-                  currentUser ? (<span className="nav-link" onClick={SignOutUser} >SIGNOUT</span>) :(
+                  currentUser ? (<NavLink as="span" onClick={SignOutUser} >SIGNOUT</NavLink>) :(
 
-                    <Link className="nav-link" to='/signin'>
+                    <NavLink to='/signin'>
                         SIGNIN
-                    </Link>
+                    </NavLink>
                   )
                 }
                <CartIcon/>
-            </div>
+            </NavLinks>
             {
 
             isCartOpen && <CartDropDown/>
             }
-        </div>
+        </NavigationContainer>
         <Outlet />
       </Fragment>
     )
